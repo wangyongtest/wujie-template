@@ -7,9 +7,19 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import legacy from '@vitejs/plugin-legacy'
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const pathSrc = path.resolve(__dirname, 'src')
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "~/assets/styles/index.scss" as *;`
+      }
+    }
+  },
   plugins: [
     vue(),
     vueJsx(),
@@ -26,16 +36,20 @@ export default defineConfig({
     }),
     Components({
       // 自动导入element plus 相关组件
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass',
+          directives: true,
+          version: '2.1.5'
+        })
+      ]
     })
   ],
   resolve: {
     alias: [
       {
-        find: '@',
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        replacement: path.resolve(__dirname, 'src')
+        find: '~/',
+        replacement: `${pathSrc}/`
       }
     ]
   },

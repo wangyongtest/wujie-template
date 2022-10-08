@@ -1,14 +1,16 @@
 import { createApp } from 'vue'
 import WuJieVue from 'wujie-vue3'
-import hostMap from '@/wujie/hostMap'
-import credentialsFetch from '@/wujie/fetch'
+import hostMap from '~/wujie/hostMap'
+import credentialsFetch from '~/wujie/fetch'
 import { createPinia } from 'pinia'
-import router from '@/router/index'
-import Layout from '@/components/layout/index.vue'
-import lifeCycles from '@/wujie/lifeCycles'
-import plugins from '@/wujie/plugins'
+import router from '~/router/index'
+import Layout from '~/components/layout/index.vue'
+import lifeCycles from '~/wujie/lifeCycles'
+import plugins from '~/wujie/plugins'
+import 'element-plus/dist/index.css'
 
-import '@/assets/styles/index.less'
+// import '~/assets/styles/index.scss'
+import '~/assets/styles/common.scss'
 
 const { bus, setupApp, preloadApp, destroyApp } = WuJieVue
 

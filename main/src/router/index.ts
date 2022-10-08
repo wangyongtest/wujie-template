@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('@/components/layout/layout.vue'),
+    component: () => import('~/components/layout/layout.vue'),
     redirect: {
       path: '/homePage'
     },
@@ -18,28 +18,28 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/homePage',
         name: 'HomePage',
-        component: () => import('@/pages/home.vue')
+        component: () => import('~/pages/home.vue')
       }
     ]
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/pages/login/index.vue')
+    component: () => import('~/pages/login/index.vue')
   },
   {
     path: '/404',
     name: 'NotFound',
-    component: () => import('@/pages/notFound/index.vue')
+    component: () => import('~/pages/notFound/index.vue')
   },
   {
     path: '/compatibility',
     name: 'NomPatibility',
-    component: () => import('@/pages/compatibility/index.vue')
+    component: () => import('~/pages/compatibility/index.vue')
   },
   {
     path: '/:pathMatch(.*)*',
-    component: () => import('@/pages/notFound/index.vue')
+    component: () => import('~/pages/notFound/index.vue')
   }
 ]
 
