@@ -1,3 +1,4 @@
+
 <template>
   <section class="sideBarMenu">
     <el-menu
@@ -30,6 +31,13 @@
 </template>
 <script setup lang="ts">
 const route = useRoute()
+const props = window.$wujie?.props
+console.log('wujie ---props', props)
+
+const changeProps = computed(() => {
+  return props
+})
+
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath, 'sunmentu')
   // 子应用发送事件

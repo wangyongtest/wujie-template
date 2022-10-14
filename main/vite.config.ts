@@ -66,5 +66,31 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
+  },
+  // logLevel: 'error',
+  build: {
+    //target: 'es2015',
+    minify: 'terser',
+    // brotliSize: false,
+    // 消除打包大小超过500kb警告
+    chunkSizeWarningLimit: 5000,
+    //remote console.log in prod
+    terserOptions: {
+      //detail to look https://terser.org/docs/api-reference#compress-options
+      compress: {
+        drop_console: false,
+        pure_funcs: ['console.log', 'console.info'],
+        drop_debugger: true
+      }
+    },
+    //build assets Separate
+    assetsDir: 'static/assets',
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+      }
+    }
   }
 })
