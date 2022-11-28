@@ -8,8 +8,9 @@
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-window.$wujie?.bus.$on('sub-route-change', (key: string, keyPath: string[]) => {
-  console.log(key, keyPath, 'page-person')
+console.log(router, 'router-----------')
+window.$wujie?.bus.$on('sub-route-change', (key: string, keyPath: string) => {
+  console.log(key, keyPath, 'page- system')
 
   router.push({ path: keyPath })
 })

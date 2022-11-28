@@ -4,8 +4,11 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import legacy from '@vitejs/plugin-legacy'
+import Inspect from 'vite-plugin-inspect'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -32,18 +35,33 @@ export default defineConfig({
       imports: ['vue', 'vue-router', 'pinia'],
       eslintrc: { enabled: true },
       //  自动导入element plus 相关函数
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        ElementPlusResolver(),
+        // 自动导入图标组件
+        IconsResolver({
+          prefix: 'Icon'
+        })
+      ]
     }),
     Components({
       // 自动导入element plus 相关组件
       resolvers: [
+        // 自动注册图标组件
+        IconsResolver({
+          enabledCollections: ['ep']
+        }),
         ElementPlusResolver({
           importStyle: 'sass',
           directives: true,
           version: '2.1.5'
         })
-      ]
-    })
+      ],
+      dts: path.resolve(pathSrc, 'components.d.ts')
+    }),
+    Icons({
+      autoInstall: true
+    }),
+    Inspect()
   ],
   resolve: {
     alias: [

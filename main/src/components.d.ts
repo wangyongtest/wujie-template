@@ -7,9 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Avatar: typeof import('./src/components/Header/avatar.vue')['default']
-    Avator: typeof import('./src/components/Header/avator.vue')['default']
-    Container: typeof import('./src/components/layout/container.vue')['default']
+    Avatar: typeof import('./components/Header/avatar.vue')['default']
+    Container: typeof import('./components/layout/container.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
@@ -21,13 +20,12 @@ declare module '@vue/runtime-core' {
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
-    Header: typeof import('./src/components/layout/header.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    Layout: typeof import('./src/components/layout/index.vue')['default']
-    LoginForm: typeof import('./src/components/Login/loginForm.vue')['default']
-    Main: typeof import('./src/components/layout/main.vue')['default']
+    Header: typeof import('./components/layout/header.vue')['default']
+    Layout: typeof import('./components/layout/index.vue')['default']
+    LoginForm: typeof import('./components/Login/loginForm.vue')['default']
+    Main: typeof import('./components/layout/main.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SideMenu: typeof import('./src/components/layout/sideMenu.vue')['default']
+    SideMenu: typeof import('./components/layout/sideMenu.vue')['default']
   }
 }

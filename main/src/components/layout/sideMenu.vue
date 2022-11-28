@@ -13,6 +13,7 @@ const sideBarUrl = computed(() => {
 })
 // 接受到信息之后存储到 pinia 中，下发对应子应用
 bus.$on('sub-route-change', (key: string) => {
+  // 根据菜单 更新 name
   console.log('基座接收自应用路由信息', key)
 })
 </script>

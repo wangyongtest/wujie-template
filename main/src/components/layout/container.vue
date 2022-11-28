@@ -9,11 +9,13 @@
   </section>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const route = useRoute()
+</script>
 
 <style lang="less">
 .container {
-  width: calc(100% - 210px);
+  width: calc(100% - 208px);
   background: #ccc;
 }
 </style>

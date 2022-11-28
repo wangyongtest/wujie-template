@@ -29,7 +29,7 @@ declare global {
       bus: EventBus
       shadowRoot?: ShadowRoot | undefined
       props?: { [key: string]: any } | undefined
-      location?: Object
+      location?: string
     }
   }
 }

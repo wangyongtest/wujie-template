@@ -10,17 +10,53 @@
 
   }" -->
   <!-- 三、 保活模式：子应用的 alive 设置为true时进入保活模式，内部的数据和路由的状态不会随着页面切换而丢失 -->
+  {{ childSystem }}
   <section style="width: 100%; height: 100%">
-    <WujieVue width="100%" height="100%" name="child" :url="childUrl" :sync="true"></WujieVue>
+    <WujieVue
+      width="100%"
+      height="100%"
+      :name="childSystem.name"
+      :url="childSystem.tempPath"
+      :sync="true"
+    ></WujieVue>
   </section>
 </template>
 
 <script lang="ts" setup>
+import WuJieVue from 'wujie-vue3'
+import { routeStore } from '~/store/routeStore'
+const router = useRouter()
+
 // import hostMap from '@/wujie/hostMap'
 // const route = useRoute()
-const childUrl = computed(() => {
-  return 'http://127.0.0.1:3003/'
+const { setState } = routeStore()
+const { bus } = WuJieVue
+// 在 xxx-sub 路由下子应用将激活路由同步给主应用，主应用跳转对应路由高亮菜单栏
+// !这里添加-sub子应用后缀文件夹
+bus.$on('sub-route-change', (name: string, path: string) => {
+  console.log('基座应用', name, path)
+  const mainName = `${name}-sub`
+  const mainPath = `/${name}-sub${path}`
+  setState({ name, path })
+  const currentName = router.currentRoute.name
+  const currentPath = router.currentRoute.path
+  if (mainName === currentName && mainPath !== currentPath) {
+    router.push({ path: mainPath })
+  }
 })
+const { routeState } = routeStore()
+console.log('11111111111111', routeState)
+const childSystem = computed(() => {
+  console.log(routeState, '000000000000000000')
+  return { name: routeState.name.replace('/', ''), tempPath: routeState.tempPath }
+})
+
+watch(
+  () => routeState.name.valueOf,
+  (newVal, oldVal) => {
+    console.log(newVal, '===============home=============')
+  }
+)
 </script>
 
 <style lang="less" scoped></style>

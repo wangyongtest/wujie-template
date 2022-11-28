@@ -1,5 +1,5 @@
 <template>
-  <section class="about">About</section>
+  <section class="about">角色管理</section>
 </template>
 
 <script lang="ts" setup></script>

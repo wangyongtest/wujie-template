@@ -16,19 +16,6 @@ const { bus, setupApp, preloadApp, destroyApp } = WuJieVue
 
 const isProduction = import.meta.env.NODE_ENV === 'production'
 
-// 在 xxx-sub 路由下子应用将激活路由同步给主应用，主应用跳转对应路由高亮菜单栏
-// !这里添加-sub子应用后缀文件夹
-bus.$on('sub-route-change', (name: string, path: string) => {
-  console.log('基座应用', name, path)
-  const mainName = `${name}-sub`
-  const mainPath = `/${name}-sub${path}`
-  const currentName = router.currentRoute.name
-  const currentPath = router.currentRoute.path
-  if (mainName === currentName && mainPath !== currentPath) {
-    router.push({ path: mainPath })
-  }
-})
-
 const degrade =
   window.localStorage.getItem('degrade') === 'true' ||
   !window.Proxy ||
@@ -71,6 +58,23 @@ setupApp({
   // 引入了的第三方样式不需要添加credentials
   fetch: (url: string, options) =>
     url.includes(hostMap('//localhost:3003/'))
+      ? credentialsFetch(url, options)
+      : window.fetch(url, options),
+  plugins,
+  prefix: { 'prefix-dialog': '/dialog', 'prefix-location': '/location' },
+  degrade,
+  ...lifeCycles
+})
+
+setupApp({
+  name: 'system',
+  url: hostMap('//localhost:3004/'),
+  attrs,
+  exec: true,
+  props,
+  // 引入了的第三方样式不需要添加credentials
+  fetch: (url: string, options) =>
+    url.includes(hostMap('//localhost:3004/'))
       ? credentialsFetch(url, options)
       : window.fetch(url, options),
   plugins,
