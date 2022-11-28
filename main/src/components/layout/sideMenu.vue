@@ -1,11 +1,32 @@
 <template>
   <section class="sideBar">
-    <WujieVue width="100%" height="100%" name="sideBar" :url="sideBarUrl" :sync="true"></WujieVue>
+    <WujieVue
+      width="100%"
+      height="100%"
+      name="sideBar"
+      :url="sideBarUrl"
+      :sync="true"
+      :props="{ propsData }"
+    ></WujieVue>
   </section>
 </template>
 
 <script lang="ts" setup>
 import WujieVue from 'wujie-vue3'
+import { themeStore } from '~/store/theme'
+const store = themeStore()
+
+const propsData = reactive({
+  customTheme: store.getCustomTheme
+})
+
+watch(
+  () => store.getCustomTheme,
+  (newVal, oldVal) => {
+    console.log(newVal, '***********************')
+    propsData.customTheme = newVal
+  }
+)
 
 const { bus } = WujieVue
 const sideBarUrl = computed(() => {

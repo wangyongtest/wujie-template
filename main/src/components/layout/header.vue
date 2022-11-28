@@ -68,12 +68,11 @@ import AvatarInfo from '~/components/Header/avatar.vue'
 import { Bell, FullScreen, Setting } from '@element-plus/icons'
 const color = ref('red')
 
-const changeColor = (e: string) => {
-  const el = document.documentElement
-  // const sideBarEl = document.getElementById('sideBar')
-  el.style.setProperty('--el-color-primary', e)
-  el.style.setProperty('--el-text-color-primary', e)
-}
+import LogoComp from '~/components/Header/logoComp.vue'
+import HandMenu from '~/components/Header/handMenu.vue'
+
+const store = themeStore()
+const color = computed(() => store.customTheme)
 </script>
 
 <style lang="less" scoped>
