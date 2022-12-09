@@ -12,6 +12,9 @@ import LoginForm from '~/components/Login/loginForm.vue'
 .loginPage {
   width: 100%;
   height: 100%;
-  background: #545c64;
+  background-image: url('/images/login/loginPageBg.jpeg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  object-fit: fill;
 }
 </style>

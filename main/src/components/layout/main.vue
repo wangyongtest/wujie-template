@@ -13,7 +13,7 @@ import SideBar from './sideMenu.vue'
 <style lang="less">
 .main {
   width: 100%;
-  height: calc(100% - 68px);
+  height: calc(100% - 60px);
   display: flex;
   justify-content: flex-start;
   box-sizing: border-box;

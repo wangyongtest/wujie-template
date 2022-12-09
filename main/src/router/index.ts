@@ -17,9 +17,19 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '/homePage',
-        name: 'HomePage',
-        component: () => import('~/pages/home.vue')
+        name: 'homePage',
+        component: () => import('~/pages/Home/index.vue')
       }
+      // {
+      //   path: '/person',
+      //   name: 'PersonPage',
+      //   component: () => import('~/pages/person/index.vue')
+      // },
+      // {
+      //   path: '/system',
+      //   name: 'SystemPage',
+      //   component: () => import('~/pages/system/index.vue')
+      // }
     ]
   },
   {
@@ -33,6 +43,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('~/pages/notFound/index.vue')
   },
   {
+    // TODO: 浏览器不兼容页面
     path: '/compatibility',
     name: 'NomPatibility',
     component: () => import('~/pages/compatibility/index.vue')

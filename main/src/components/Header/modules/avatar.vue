@@ -2,7 +2,7 @@
   <section class="avatarInfo">
     <el-dropdown>
       <span class="el-dropdown-link">
-        <el-avatar :size="45" src="https://empty" @error="errorHandler">
+        <el-avatar :size="45" @error="errorHandler">
           <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
         </el-avatar>
         <el-icon class="el-icon--right">

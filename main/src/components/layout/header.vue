@@ -66,13 +66,16 @@
 <script lang="ts" setup>
 import AvatarInfo from '~/components/Header/avatar.vue'
 import { Bell, FullScreen, Setting } from '@element-plus/icons'
+import { themeStore } from '~/store/theme'
+
+// 自定义主题
 const color = ref('red')
 
-import LogoComp from '~/components/Header/logoComp.vue'
-import HandMenu from '~/components/Header/handMenu.vue'
+const { changeTheme } = themeStore()
 
-const store = themeStore()
-const color = computed(() => store.customTheme)
+const changeColor = () => {
+  changeTheme(color.value)
+}
 </script>
 
 <style lang="less" scoped>

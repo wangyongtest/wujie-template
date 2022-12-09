@@ -27,6 +27,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     legacy({
+      // 浏览器兼容性插件
       targets: ['defaults', 'not IE 11']
     }),
     // ! enabled: true 这里用来解决 eslint报错的配置项，会根据filepath生成一个eslint 的配置文件，这个文件需要引入到eslintrc 的extends选项中
@@ -87,7 +88,8 @@ export default defineConfig({
   },
   // logLevel: 'error',
   build: {
-    //target: 'es2015',
+    //target: 'es2015', // js兼容处理
+    // cssTarget: 'chrome49', // css兼容处理
     minify: 'terser',
     // brotliSize: false,
     // 消除打包大小超过500kb警告

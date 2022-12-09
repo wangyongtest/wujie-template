@@ -1,5 +1,7 @@
+
 import { createApp } from 'vue'
-import router from '@/router/index'
+import { createPinia } from 'pinia'
+import router from './router/index'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
@@ -11,6 +13,7 @@ if (window.__POWERED_BY_WUJIE__) {
     instance = createApp(App)
     instance.use(router)
     instance.use(ElementPlus)
+    instance.use(createPinia())
     instance.mount('#sideBar')
   }
   window.__WUJIE_UNMOUNT = () => {
@@ -21,6 +24,7 @@ if (window.__POWERED_BY_WUJIE__) {
 } else {
   const app = createApp(App)
   app.use(router)
+  app.use(createPinia())
   app.use(ElementPlus)
   app.mount('#sideBar')
 }

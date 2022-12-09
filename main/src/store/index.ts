@@ -1,4 +1,6 @@
-export const useCounterStore = defineStore("counter", () => {
+// demo pinia示例
+
+export const useCounterStore = defineStore('counter', () => {
   const count = ref(0)
   const doubleCount = computed(() => {
     return count.value * 2

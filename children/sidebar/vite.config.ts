@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
@@ -6,11 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-const resolvePath = (str: string): string => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return resolve(__dirname, str)
-}
+const pathSrc = resolve(__dirname, 'src')
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,7 +17,7 @@ export default defineConfig({
     // ! enabled: true 这里用来解决 eslint报错的配置项，会根据filepath生成一个eslint 的配置文件，这个文件需要引入到eslintrc 的extends选项中
     // 由于仅需生成一次，所以生成完文件后，配置项改为false
     AutoImport({
-      imports: ['vue', 'vue-router'],
+      imports: ['vue', 'vue-router','pinia'],
       eslintrc: { enabled: true },
       //  自动导入element plus 相关函数
       resolvers: [ElementPlusResolver()],
@@ -33,8 +30,8 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@',
-        replacement: resolvePath('src'),
+        find: '~/',
+        replacement: `${pathSrc}/`
       },
     ],
   },

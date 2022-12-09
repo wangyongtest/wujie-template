@@ -1,19 +1,39 @@
+
+
 <template>
-  <section>
+  <section class="content">
     <router-view></router-view>
   </section>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+interface SubApplicationParams {
+  path: string
+  params?: {
+    [key:string]: string
+  }
+}
 
 const router = useRouter()
-console.log(router, 'router-----------')
-window.$wujie?.bus.$on('sub-route-change', (key: string, keyPath: string) => {
-  console.log(key, keyPath, 'page- system')
 
-  router.push({ path: keyPath })
+window.$wujie.bus.$on('distribution-to-sub', (res:SubApplicationParams) => {
+  router.push(res.path)
 })
+
+
+// TODO: $wujie.props 仅初始化渲染执行【待确认】
+// watch(()=> window.$wujie?.props, (newVal, oldVal) => {
+//   console.warn(newVal, '---')
+//   if(newVal) {
+//     router.push(newVal.path)
+//   }
+// },{
+//   immediate: true,
+//   deep: true
+// })
+
+
 </script>
 
 <style lang="less">

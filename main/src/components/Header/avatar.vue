@@ -1,6 +1,6 @@
 <template>
   <section class="avatarInfo">
-    <el-avatar :size="52" src="https://empty" @error="errorHandler">
+    <el-avatar :size="52" @error="errorHandler">
       <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
     </el-avatar>
   </section>

@@ -7,17 +7,30 @@
     prod: '/example/prod',
     test: '/example/test'
     prodId: '/example/prod/debug?id=',
-
-  }" -->
+}" -->
   <!-- 三、 保活模式：子应用的 alive 设置为true时进入保活模式，内部的数据和路由的状态不会随着页面切换而丢失 -->
-  {{ childSystem }}
+
+  <!--  exec 预执行 -->
+  <!-- sync 路由同步开关 如果false，子应用跳转主应用路由无变化，但是主应用的history还是会增加 -->
+
+  {{ typeof childSystem }}
+  {{ props }}
+
   <section style="width: 100%; height: 100%">
     <WujieVue
       width="100%"
       height="100%"
       :name="childSystem.name"
       :url="childSystem.tempPath"
+      :exec="false"
       :sync="true"
+      :alive="false"
+      :props="props"
+      :beforeLoad="beforeLoad"
+      :beforeMount="beforeMount"
+      :afterMount="afterMount"
+      :beforeUnmount="beforeUnmount"
+      :afterUnmount="afterUnmount"
     ></WujieVue>
   </section>
 </template>
@@ -26,37 +39,63 @@
 import WuJieVue from 'wujie-vue3'
 import { routeStore } from '~/store/routeStore'
 const router = useRouter()
+// 传参使用
+const props = reactive({
+  name: '',
+  path: ''
+})
 
-// import hostMap from '@/wujie/hostMap'
-// const route = useRoute()
-const { setState } = routeStore()
+const { setState, routeState } = routeStore()
 const { bus } = WuJieVue
 // 在 xxx-sub 路由下子应用将激活路由同步给主应用，主应用跳转对应路由高亮菜单栏
 // !这里添加-sub子应用后缀文件夹
 bus.$on('sub-route-change', (name: string, path: string) => {
-  console.log('基座应用', name, path)
+  console.log('基座应用', 'name:', name, 'path:', path)
   const mainName = `${name}-sub`
   const mainPath = `/${name}-sub${path}`
   setState({ name, path })
-  const currentName = router.currentRoute.name
-  const currentPath = router.currentRoute.path
+  const currentName = router.currentRoute.value.name
+  const currentPath = router.currentRoute.value.path
   if (mainName === currentName && mainPath !== currentPath) {
     router.push({ path: mainPath })
   }
 })
-const { routeState } = routeStore()
-console.log('11111111111111', routeState)
+
+// console.log('11111111111111', routeState)
 const childSystem = computed(() => {
-  console.log(routeState, '000000000000000000')
-  return { name: routeState.name.replace('/', ''), tempPath: routeState.tempPath }
+  return reactive({
+    name: routeState.name || 'home',
+    tempPath: routeState.tempPath || 'http://127.0.0.1:3003/'
+  })
 })
 
+// const fetch = ref('')
+
 watch(
-  () => routeState.name.valueOf,
-  (newVal, oldVal) => {
-    console.log(newVal, '===============home=============')
+  () => routeState.name,
+  (newVal) => {
+    console.log(newVal, `=======基座-watch========${newVal}=============`)
   }
 )
+
+const beforeLoad = (appWindow: Window) => {
+  console.log('beforeLoad=====>', appWindow)
+}
+const beforeMount = (appWindow: Window) => {
+  console.log('beforeMount=====>', appWindow)
+  // props.value = {
+  //   path: '/systemMenu'
+  // }
+}
+const afterMount = (appWindow: Window) => {
+  console.log('afterMount=====>', appWindow)
+}
+const beforeUnmount = (appWindow: Window) => {
+  console.log('beforeUnmount=====>', appWindow)
+}
+const afterUnmount = (appWindow: Window) => {
+  console.log('afterUnmount=====>', appWindow)
+}
 </script>
 
 <style lang="less" scoped></style>

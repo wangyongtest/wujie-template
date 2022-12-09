@@ -12,35 +12,44 @@
 </template>
 
 <script lang="ts" setup>
-import WujieVue from 'wujie-vue3'
+import { bus } from 'wujie'
 import { themeStore } from '~/store/theme'
 const store = themeStore()
-
+const router = useRouter()
 const propsData = reactive({
   customTheme: store.getCustomTheme
 })
 
 watch(
   () => store.getCustomTheme,
-  (newVal, oldVal) => {
-    console.log(newVal, '***********************')
+  (newVal) => {
     propsData.customTheme = newVal
   }
 )
 
-const { bus } = WujieVue
 const sideBarUrl = computed(() => {
-  return 'http://127.0.0.1:3002/'
+  return `${import.meta.env.VITE_SIDE_BAR}`
 })
+
+// TODO: 无界接手菜单传回来参数
+interface WujieParams {
+  [key: string]: string
+}
+
 // 接受到信息之后存储到 pinia 中，下发对应子应用
-bus.$on('sub-route-change', (key: string) => {
-  // 根据菜单 更新 name
-  console.log('基座接收自应用路由信息', key)
-})
+// bus.$on('side-route-change', (params: WujieParams) => {
+// 根据菜单 更新 name
+// console.warn('基座接收自应用路由信息', params)
+// const { subSys } = params
+// const sysRoute = subSys && subSys.split('-')[1]
+// router.push(`/${sysRoute}`)
+// })
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .sideBar {
   max-width: 200px;
+  height: 100%;
+  background: red;
 }
 </style>

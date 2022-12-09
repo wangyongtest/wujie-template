@@ -1,29 +1,35 @@
-import { Ref } from 'vue'
-
 interface RoutePayload {
-  name: string
+  subSys: string
+  keyPath: string
+  params?: {
+    [key: string]: string
+  }
 }
 
 export const routeStore = defineStore('routeStore', () => {
-  const routeState = reactive({
-    name: 'child',
-    tempPath: 'http://127.0.0.1:3003/'
+  const routeState = ref<RoutePayload>({
+    subSys: '',
+    keyPath: '',
+    params: {}
   })
 
-  const setState = async (payload: RoutePayload) => {
-    routeState.name = payload.name
-    routeState.tempPath = await tempPathList(payload.name)
-    console.log(routeState, '===================routeState===============')
+  const setState = async ({ subSys, keyPath, params }: RoutePayload) => {
+    routeState.value = Object.assign(
+      {},
+      {
+        subSys,
+        keyPath,
+        params
+      }
+    )
   }
 
-  const tempPathList = (name: Ref) => {
-    console.log(name, 'name=================')
-
-    switch (name.value) {
-      case '/home': {
+  const tempPathList = (name: string) => {
+    switch (name) {
+      case 'person': {
         return 'http://127.0.0.1:3003/'
       }
-      case '/system': {
+      case 'system': {
         return 'http://127.0.0.1:3004/'
       }
       default:
