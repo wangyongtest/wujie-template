@@ -19,7 +19,7 @@ interface CrossSystemParameter {
 const jump = (parameter:CrossSystemParameter) => {
   window.$wujie?.bus.$emit('subSystem-route-change', {
     system: 'sub-system',
-    route: '/systemUser',
+    route: '/systemMenu',
     query:{
       name: 'test',
       age: 10
