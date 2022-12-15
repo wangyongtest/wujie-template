@@ -2,17 +2,17 @@
 <template>
   <section class="leftMenu">
     <el-menu
-      :mode="menuMode"
-      :collapse="collapse"
-      :background-color="backgroundColor"
-      :text-color="textColor"
-      :active-text-color="activeTextColor"
-      :default-active="defaultActive"
-      :default-opened="defaultOpened"
-      :unique-opened="uniqueOpened"
-      :router="isRouter"
-      :collapse-transition="collapseTransition"
-      :popper-effect="popperEffect"
+      :mode="setDefault.menuMode"
+      :collapse="setDefault.collapse"
+      :background-color="setDefault.backgroundColor"
+      :text-color="setDefault.textColor"
+      :active-text-color="setDefault.activeTextColor"
+      :default-active="setDefault.defaultActive"
+      :default-opened="setDefault.defaultOpened"
+      :unique-opened="setDefault.uniqueOpened"
+    
+      :collapse-transition="setDefault.collapseTransition"
+      :popper-effect="setDefault.popperEffect"
       @select="handSelect">
         <template v-for="route in menuData" :key="route.id">
             <!-- 递归的组件 -->
@@ -58,10 +58,16 @@ const menuData = reactive(testRoute)
 // 系统和子应用的对应关系
 const { routeForSys } = routeForSystem()
 
+const setDefault = computed(() => {
+  return props.menuConfig
+})
 
 const emits = defineEmits(['getSelect'])
+
+// TODO: 左侧菜单选中
 const handSelect = (key:string, keyPath:string) => {
   const sysKey = keyPath[0]
+  // console.warn('sideBar=====》',key, keyPath,sysKey)
   emits('getSelect', {
     subSys: routeForSys[sysKey],
     keyPath: keyPath[keyPath.length - 1]
@@ -69,7 +75,7 @@ const handSelect = (key:string, keyPath:string) => {
 }
 
 watch(()=>defaultOpened, (newVal, oldVal) => {
-  if(newVal){
+  if(newVal) {
     const sysKey = newVal[0]
     emits('getSelect', {
     subSys: routeForSys[sysKey],
@@ -77,7 +83,8 @@ watch(()=>defaultOpened, (newVal, oldVal) => {
   })
   }
 },{
-  immediate: true
+  immediate: true,
+  deep: true
 })
 
 </script>

@@ -1,12 +1,10 @@
+
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
  {
   path: '/home',
   name: '主页',
-  redirect:{
-    path: '/homeList'
-  },
   children:[
      {
       path: '/homeList',
@@ -22,12 +20,6 @@ const routes: RouteRecordRaw[] = [
     path: '/about',
     name: 'About',
     component: () => import('@/pages/about.vue')
-  },
-  {
-    path: '/',
-    redirect:{
-      path: '/home'
-    }
   }
 ]
 

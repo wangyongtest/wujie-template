@@ -24,11 +24,43 @@ const menuConfig = reactive<MenuConfig>({
   popperEffect: 'dark'
 })
 
-
-const getSelectPath = (val:{subSys:string, keyPath:string}) => {
-  console.warn(val)
-  window.$wujie?.bus.$emit('side-route-change', val)
+interface SystemRouteChange {
+system: string
+route: string
+query:{
+  [key:string]: string
 }
+}
+
+
+// TODO: 默认首次进入系统设置选中： 菜单+ 跳转至默认页面
+const getSelectPath = (val:{subSys:string, keyPath:string}) => {
+  console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
+  menuConfig.defaultActive = val.keyPath
+  menuConfig.defaultOpened = val.subSys.includes('sub-') ? [`${val.subSys.replace(/sub-/, '')}`]:[`${val.subSys}`]
+  window.$wujie.bus.$emit('side-route-change', val)
+}
+
+
+
+// TODO: 跨系统跳转时 sideBar 选中
+// window.$wujie.bus.$on('set-sideBar-select', (parameter: SystemRouteChange) => {
+//   console.warn('====getSelectPath=====set-sideBar-select==========', parameter)
+//   const routeParams = {
+//     system: parameter.system,
+//     route: parameter.route,
+//     query: {
+//       ...parameter.query
+//     }
+//   }
+
+//   menuConfig.defaultOpened = [`${parameter.system}`]
+//   menuConfig.defaultActive = parameter.route
+
+//   // window.$wujie.bus.$emit('distribution-to-sub', routeParams)
+// })
+
+
 
 </script>
 

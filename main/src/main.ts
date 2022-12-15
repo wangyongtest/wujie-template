@@ -75,7 +75,7 @@ const isProduction = import.meta.env.NODE_ENV === 'production'
 // 引入了的第三方样式不需要添加credentials
 // fetch: (url: string, options) =>
 //   url.includes(hostMap('//localhost:3004/'))
-//     ? credentialsFetch(url, options)
+// ? credentialsFetch(url, options)
 //     : window.fetch(url, options),
 // plugins,
 // prefix: { 'prefix-dialog': '/dialog', 'prefix-location': '/location' }

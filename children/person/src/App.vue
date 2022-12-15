@@ -6,22 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-
-
-interface SubApplicationParams {
-  path: string
-  params?: {
-    [key:string]: string
-  }
-}
-
 const router = useRouter()
-
-window.$wujie.bus.$on('distribution-to-sub', (res:SubApplicationParams) => {
-  router.push(res.path)
+window.$wujie.bus.$on('distribution-to-sub', (data) => {
+router.push({path: data.path})
 })
-
 </script>
 
 <style lang="less">

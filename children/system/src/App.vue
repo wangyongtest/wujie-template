@@ -1,5 +1,6 @@
 
 
+
 <template>
   <section class="content">
     <router-view></router-view>
@@ -10,15 +11,20 @@
 import { useRouter } from 'vue-router'
 interface SubApplicationParams {
   path: string
-  params?: {
+  query?: {
     [key:string]: string
   }
 }
 
+
 const router = useRouter()
 
 window.$wujie.bus.$on('distribution-to-sub', (res:SubApplicationParams) => {
-  router.push(res.path)
+  console.warn(
+    `%c system------->${JSON.stringify(res)}`,
+    'color:purple;font-size: 24px;font-weight: bold;text-decoration: underline;'
+  )
+  router.push({ path: res.path ,query:{...res.query} }  )
 })
 
 

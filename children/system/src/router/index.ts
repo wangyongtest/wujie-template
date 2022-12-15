@@ -1,12 +1,10 @@
+
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
  {
   path: '/system',
   name: '系统管理',
-  redirect:{
-    path: '/systemRole'
-  },
   children:[
      {
       path: '/systemRole',

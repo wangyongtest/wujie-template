@@ -12,17 +12,17 @@
 </template>
 
 <script lang="ts" setup>
-const route = useRoute()
-watch(
-  () => route.query,
-  (newVal) => {
-    console.warn('base-watch-newVal======>', newVal)
-  },
-  {
-    immediate: true,
-    deep: true
-  }
-)
+// const route = useRoute()
+// watch(
+//   () => route.query,
+//   (newVal) => {
+//     console.warn('base-watch-newVal======>', newVal)
+//   },
+//   {
+//     immediate: true,
+//     deep: true
+//   }
+// )
 </script>
 
 <style lang="less">

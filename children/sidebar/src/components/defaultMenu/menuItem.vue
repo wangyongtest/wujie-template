@@ -1,7 +1,6 @@
-
 <template>
   <section class="menuItem">
-    <template v-if="(list.children&&list.children.length)">
+    <template v-if="(list.children && list.children.length)">
       <el-sub-menu :index="list.path">
         <template #title>
           <el-icon>
