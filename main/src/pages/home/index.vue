@@ -40,8 +40,10 @@ import { subPaths } from '~/sub-path-config/index'
 // TODO: 设置或获取 默认子应用配置项
 import { defaultSubConf } from '~/store/defaultSubConf'
 
+// TODO:
 const { setDefaultSubConf, getDefaultSubConf } = defaultSubConf()
 
+// TODO: ts 类型定义，基座与子应用交互的路由和参数
 interface SystemRouteChange {
   system: string
   route: string
@@ -50,15 +52,16 @@ interface SystemRouteChange {
   }
 }
 
+// TODO: 无界 eventBus
 const { bus } = wujieVue3
 
 // TODO: 定义默认属性
 const attributes = reactive({
   name: '',
   url: '',
-  sync: false,
-  exec: false,
-  fiber: false,
+  sync: true,
+  exec: true,
+  fiber: true,
   degrade: false,
   attrs: {},
   props: {}, // TODO: 首次渲染才会传值子组件
@@ -67,9 +70,11 @@ const attributes = reactive({
   // replace: {},
 })
 
+// 在 页面挂载时，设置要挂载的 子应用
 onMounted(() => {
-  attributes.name = 'person'
-  attributes.url = 'http://127.0.0.1:3003/'
+  //  TODO: 设置默认子应用，可配置、可调接口设置
+  attributes.name = getDefaultSubConf.name
+  attributes.url = getDefaultSubConf.path
 })
 
 //  TODO: 菜单路由监听路由 切换
@@ -88,10 +93,10 @@ bus.$on('side-route-change', (...res: Array<{ subSys: string; keyPath: string }>
       attributes.name = subSys.replace(/sub-/, '')
       attributes.url = subPaths[attributes.name]
     } else {
-      console.warn(
-        `%c main--->${JSON.stringify(res)}`,
-        'color:red;font-size: 24px;font-weight: bold;text-decoration: underline;'
-      )
+      // console.warn(
+      //   `%c main--->${JSON.stringify(res)}`,
+      //   'color:red;font-size: 24px;font-weight: bold;text-decoration: underline;'
+      // )
       // TODO: sideBar 选中 提交基座 基座分发子系统
       // TODO: 子系统  跨系统跳转  转发基座  基座传sidebar  再走基座选中
       bus.$emit('distribution-to-sub', attributes.props)
@@ -100,24 +105,24 @@ bus.$on('side-route-change', (...res: Array<{ subSys: string; keyPath: string }>
 })
 
 // TODO: 跨系统
-// bus.$on('subSystem-route-change', (childParams: SystemRouteChange) => {
-//   console.warn('子应用传参到基座', childParams)
-//   attributes.name = childParams.system.replace(/sub-/, '')
-//   attributes.url = subPaths[attributes.name]
-//   attributes.props = Object.assign(
-//     {},
-//     {
-//       path: childParams.route,
-//       query: {
-//         ...childParams.query
-//       }
-//     }
-//   )
-//   // TODO: 传惨给sideBar
-//   bus.$emit('set-sideBar-select', childParams)
-//   // TODO: 传参给对应子系统
-//   bus.$emit('distribution-to-sub', attributes.props)
-// })
+bus.$on('subSystem-route-change', (childParams: SystemRouteChange) => {
+  // console.warn('子应用传参到基座', childParams)
+  attributes.name = childParams.system.replace(/sub-/, '')
+  attributes.url = subPaths[attributes.name]
+  attributes.props = Object.assign(
+    {},
+    {
+      path: childParams.route,
+      query: {
+        ...childParams.query
+      }
+    }
+  )
+  // TODO: 传惨给sideBar
+  bus.$emit('set-sideBar-select', childParams)
+  // TODO: 传参给对应子系统
+  bus.$emit('distribution-to-sub', attributes.props)
+})
 
 const beforeLoad = (appWindow: Window) => {
   console.warn('base-index=======》 beforeLoad', appWindow)
