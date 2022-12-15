@@ -1,5 +1,4 @@
 
-
 export const testRoute = [
 	{
 		id: '1',
@@ -62,7 +61,7 @@ export const testRoute = [
       {
 				id: '2-2',
 				name: '用户管理',
-				path: '/systemUser',
+				path: '/systemRole',
         meta:{
           icon: '',
           role: [],

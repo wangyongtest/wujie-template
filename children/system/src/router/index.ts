@@ -1,4 +1,5 @@
 
+
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
@@ -8,25 +9,30 @@ const routes: RouteRecordRaw[] = [
   children:[
      {
       path: '/systemRole',
-      component: () => import('@/pages/home.vue')
+      name: 'SystemRole',
+      meta:{
+        icon: '',
+        menuName: ''
+      },
+      component: () => import('@/pages/Home/systemRole.vue')
     },
     {
       path: '/systemMenu',
-      component: () => import('@/pages/homeDetail.vue')
+      name: 'SystemMenu',
+      meta:{
+        icon: '',
+        menuName: ''
+      },
+      component: () => import('@/pages/Home/systemMenu.vue')
+    },
+    {
+      path: '/system',
+      redirect:{
+        path: '/systemRole'
+      }
     }
   ]
- },
-  {
-    path: '/systemUser',
-    name: 'About',
-    component: () => import('@/pages/about.vue')
-  },
-  {
-    path: '/system',
-    redirect:{
-      path: '/systemRole'
-    }
-  }
+ }
 ]
 
 export default createRouter({

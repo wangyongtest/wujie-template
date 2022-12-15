@@ -38,7 +38,14 @@ query:{
 const getSelectPath = (val:{subSys:string, keyPath:string}) => {
   // console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
   menuConfig.defaultActive = val.keyPath
-  menuConfig.defaultOpened = val.subSys.includes('sub-') ? [`${val.subSys.replace(/sub-/, '')}`]:[`${val.subSys}`]
+  // TODO: 带层级显示系统，不带层级不显示系统，因此需要匹配
+  if(val.subSys){
+    menuConfig.defaultOpened = val.subSys.includes('sub-') ? [`${val.subSys.replace(/sub-/, '')}`]:[`${val.subSys}`]
+  }else{
+    // !待设计
+    val.subSys = 'person'
+  }
+ 
   window.$wujie.bus.$emit('side-route-change', val)
 }
 

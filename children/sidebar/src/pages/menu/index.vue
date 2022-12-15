@@ -1,4 +1,5 @@
 
+
 <template>
   <section class="leftMenu">
     <el-menu
@@ -66,10 +67,13 @@ const emits = defineEmits(['getSelect'])
 
 // TODO: 左侧菜单选中
 const handSelect = (key:string, keyPath:string) => {
-  const sysKey = keyPath[0]
+  let sysKey = keyPath[0]
+  if(!sysKey){
+   sysKey = menuData.map(m=>m.meta.systemName).join('')
+  }
   // console.warn('sideBar=====》',key, keyPath,sysKey)
   emits('getSelect', {
-    subSys: routeForSys[sysKey],
+    subSys: routeForSys[sysKey] || routeForSys[`/${sysKey}`],
     keyPath: keyPath[keyPath.length - 1]
   })
 }
@@ -78,7 +82,7 @@ watch(()=>defaultOpened, (newVal, oldVal) => {
   if(newVal) {
     const sysKey = newVal[0]
     emits('getSelect', {
-    subSys: routeForSys[sysKey],
+    subSys: routeForSys[sysKey] || routeForSys[`/${sysKey}`],
     keyPath: defaultActive
   })
   }

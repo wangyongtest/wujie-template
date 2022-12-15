@@ -1,6 +1,5 @@
 <template>
   <section class="home">
-    {{ attributes }}
     <WujieVue
       width="100%"
       height="100%"
@@ -40,10 +39,10 @@ import { subPaths } from '~/sub-path-config/index'
 // TODO: 设置或获取 默认子应用配置项
 import { defaultSubConf } from '~/store/defaultSubConf'
 
-// TODO:
+// TODO: 设置 & 获取默认配置项
 const { setDefaultSubConf, getDefaultSubConf } = defaultSubConf()
 
-// TODO: ts 类型定义，基座与子应用交互的路由和参数
+// TODO: TS 类型定义，基座与子应用交互的路由和参数
 interface SystemRouteChange {
   system: string
   route: string
@@ -79,6 +78,7 @@ onMounted(() => {
 
 //  TODO: 菜单路由监听路由 切换
 bus.$on('side-route-change', (...res: Array<{ subSys: string; keyPath: string }>) => {
+  console.warn(res, 'main')
   if (res.length) {
     const { subSys, keyPath } = res[0]
     attributes.props = Object.assign(
