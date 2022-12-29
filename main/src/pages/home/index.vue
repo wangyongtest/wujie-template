@@ -54,7 +54,7 @@ watch(
   (newVal) => {
     if (newVal.path && newVal.system) {
       attributes.name = newVal.system
-      attributes.props = { path: newVal.path }
+      attributes.props = { path: newVal.path, query: newVal.query }
       attributes.url = tempPathList(newVal.system)
     }
   },

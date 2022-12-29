@@ -1,5 +1,6 @@
 
 
+
 <template>
   <section>
     <el-button @click="jump">jump</el-button>
@@ -10,7 +11,7 @@
 
 interface CrossSystemParameter {
   system: string
-  route: string
+  path: string
   query: {
     [key: string]: string | number
   }
@@ -18,8 +19,8 @@ interface CrossSystemParameter {
 
 const jump = (parameter:CrossSystemParameter) => {
   window.$wujie?.bus.$emit('subSystem-route-change', {
-    system: 'sub-system',
-    route: '/systemMenu',
+    system: 'system',
+    path: '/systemMenu',
     query:{
       name: 'test',
       age: 10

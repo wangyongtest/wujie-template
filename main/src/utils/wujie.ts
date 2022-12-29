@@ -32,20 +32,11 @@ bus.$on('side-route-change', (...res: Array<{ system: string; path: string }>) =
 
 // TODO: 跨系统
 bus.$on('subSystem-route-change', (childParams: SystemRouteChange) => {
-  // console.warn('子应用传参到基座', childParams)
-  attributes.name = childParams.system.replace(/sub-/, '')
-  attributes.url = subPaths[attributes.name]
-  attributes.props = Object.assign(
-    {},
-    {
-      path: childParams.route,
-      query: {
-        ...childParams.query
-      }
-    }
-  )
+  console.warn('子应用传参到基座', childParams)
+  const { path, system, query } = childParams
+  setWuJieRouterState({ system, path, query })
   // TODO: 传惨给sideBar
   bus.$emit('set-sideBar-select', childParams)
   // TODO: 传参给对应子系统
-  bus.$emit('distribution-to-sub', attributes.props)
+  bus.$emit('distribution-to-sub', childParams)
 })

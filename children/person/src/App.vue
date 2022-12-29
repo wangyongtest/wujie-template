@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, watch} from 'vue'
+import { watch } from 'vue'
 interface SubApplicationParams {
   path: string
   params?: {
@@ -19,20 +19,17 @@ interface SubApplicationParams {
 const router = useRouter()
 
 window.$wujie?.bus.$on('distribution-to-sub', (res:SubApplicationParams) => {
-  
   if(res.path){
-    // console.warn(`%c person--->${JSON.stringify(res)}`,'color: #43bb;font-size: 24px;font-weight: bold;text-decoration: underline;')
     router.push({path: res.path})
   }
-
 })
 
+// TODO: 初次监听默认值
 watch(()=> window.$wujie.props, (newVal, oldVal) => {
   if(newVal&&newVal.path) {
-    // console.warn(`%c person--->${JSON.stringify(newVal)}`,'color: #43bb;font-size: 24px;font-weight: bold;text-decoration: underline;')
    router.push({path: newVal.path})
   }
- 
+
 },{
   immediate: true,
   deep: true
