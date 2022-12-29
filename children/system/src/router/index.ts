@@ -1,5 +1,6 @@
 
 
+
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
@@ -12,24 +13,27 @@ const routes: RouteRecordRaw[] = [
       name: 'SystemRole',
       meta:{
         icon: '',
-        menuName: ''
+        menuName: '角色管理'
       },
-      component: () => import('@/pages/Home/systemRole.vue')
+      component: () => import('@/pages/role/index.vue')
     },
     {
       path: '/systemMenu',
       name: 'SystemMenu',
       meta:{
         icon: '',
-        menuName: ''
+        menuName: '菜单管理'
       },
-      component: () => import('@/pages/Home/systemMenu.vue')
+      component: () => import('@/pages/menus/index.vue')
     },
     {
-      path: '/system',
-      redirect:{
-        path: '/systemRole'
-      }
+      path: '/systemAuth',
+      name: 'SystemAuth',
+      meta:{
+        icon: '',
+        menuName: '权限管理'
+      },
+      component: () => import('@/pages/auth/index.vue')
     }
   ]
  }

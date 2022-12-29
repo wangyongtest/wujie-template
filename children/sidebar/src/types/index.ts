@@ -1,5 +1,6 @@
 
 
+
 export interface MenuConfig {
   defaultOpened: Array<string>
   menuMode: string
@@ -12,4 +13,18 @@ export interface MenuConfig {
   isRouter: boolean
   collapseTransition: boolean
   popperEffect: string
+}
+
+export interface RouteItem {
+    id:string,
+    name: string,
+    path: string,
+    meta:{
+      icon?: string
+      role?: Array<string>
+      isDisabled?: boolean
+      level?: number
+      systemName?: string
+    }
+    children?: RouteItem[]
 }

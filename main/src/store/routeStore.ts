@@ -39,6 +39,7 @@ export const routeStore = defineStore('routeStore', () => {
 
   return {
     setState,
-    routeState
+    routeState,
+    tempPathList
   }
 })

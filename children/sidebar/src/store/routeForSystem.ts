@@ -7,8 +7,8 @@ interface RouteMapping {
 
 export const routeForSystem = defineStore('mappingRoutes', () => {
   const routeForSys = ref<RouteMapping>({
-    '/home': 'sub-person',
-    '/system': 'sub-system'
+    '/home': 'person',
+    '/system': 'system'
   })
 
   return {

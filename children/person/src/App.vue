@@ -1,4 +1,6 @@
 
+
+
 <template>
   <section class="personContent">
     <router-view></router-view>
@@ -17,12 +19,17 @@ interface SubApplicationParams {
 const router = useRouter()
 
 window.$wujie?.bus.$on('distribution-to-sub', (res:SubApplicationParams) => {
-  // console.warn(`%c person--->${JSON.stringify(res)}`,'color: #43bb;font-size: 24px;font-weight: bold;text-decoration: underline;')
-  router.push({path: res.path})
+  
+  if(res.path){
+    // console.warn(`%c person--->${JSON.stringify(res)}`,'color: #43bb;font-size: 24px;font-weight: bold;text-decoration: underline;')
+    router.push({path: res.path})
+  }
+
 })
 
 watch(()=> window.$wujie.props, (newVal, oldVal) => {
   if(newVal&&newVal.path) {
+    // console.warn(`%c person--->${JSON.stringify(newVal)}`,'color: #43bb;font-size: 24px;font-weight: bold;text-decoration: underline;')
    router.push({path: newVal.path})
   }
  

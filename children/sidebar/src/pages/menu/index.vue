@@ -11,7 +11,6 @@
       :default-active="setDefault.defaultActive"
       :default-opened="setDefault.defaultOpened"
       :unique-opened="setDefault.uniqueOpened"
-    
       :collapse-transition="setDefault.collapseTransition"
       :popper-effect="setDefault.popperEffect"
       @select="handSelect">
@@ -34,6 +33,9 @@ import { MenuConfig } from '~/types/index'
 
 // TODO: 获取菜单和系统的映射关系表
 import { routeForSystem } from '~/store/routeForSystem'
+
+
+import {floatDataArray} from '~/utils/index'
 
 // TODO: 获取父组件传过来的配置参数
 const props = withDefaults(defineProps<{
@@ -63,27 +65,26 @@ const setDefault = computed(() => {
   return props.menuConfig
 })
 
+// console.log(floatDataArray(testRoute))
+const floatRoutes = floatDataArray(testRoute)
+
 const emits = defineEmits(['getSelect'])
 
-// TODO: 左侧菜单选中
-const handSelect = (key:string, keyPath:string) => {
-  let sysKey = keyPath[0]
-  if(!sysKey){
-   sysKey = menuData.map(m=>m.meta.systemName).join('')
-  }
-  // console.warn('sideBar=====》',key, keyPath,sysKey)
+// *TODO: 左侧菜单选中
+const handSelect = (key:string) => {
+  const item = floatRoutes.find(r=> r.path === key&&r)
   emits('getSelect', {
-    subSys: routeForSys[sysKey] || routeForSys[`/${sysKey}`],
-    keyPath: keyPath[keyPath.length - 1]
+    system: item?.meta.systemName || '',
+    path: item?.path || ''
   })
 }
 
-watch(()=>defaultOpened, (newVal, oldVal) => {
+watch(()=> defaultOpened, (newVal, oldVal) => {
   if(newVal) {
     const sysKey = newVal[0]
     emits('getSelect', {
-    subSys: routeForSys[sysKey] || routeForSys[`/${sysKey}`],
-    keyPath: defaultActive
+    system: routeForSys[sysKey] || routeForSys[`/${sysKey}`],
+    path: defaultActive
   })
   }
 },{

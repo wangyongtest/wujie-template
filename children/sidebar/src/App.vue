@@ -1,5 +1,6 @@
 
 
+
 <template>
   <Menu
     ref="menuNode"
@@ -37,14 +38,14 @@ query:{
 // TODO: 默认首次进入系统设置选中： 菜单+ 跳转至默认页面
 const getSelectPath = (val:{subSys:string, keyPath:string}) => {
   // console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
-  menuConfig.defaultActive = val.keyPath
-  // TODO: 带层级显示系统，不带层级不显示系统，因此需要匹配
-  if(val.subSys){
-    menuConfig.defaultOpened = val.subSys.includes('sub-') ? [`${val.subSys.replace(/sub-/, '')}`]:[`${val.subSys}`]
-  }else{
-    // !待设计
-    val.subSys = 'person'
-  }
+  // menuConfig.defaultActive = val.keyPath
+  // // TODO: 带层级显示系统，不带层级不显示系统，因此需要匹配
+  // if(val.subSys){
+  //   menuConfig.defaultOpened = val.subSys.includes('sub-') ? [`${val.subSys.replace(/sub-/, '')}`]:[`${val.subSys}`]
+  // }else{
+  //   // !待设计
+  //   val.subSys = 'person'
+  // }
  
   window.$wujie.bus.$emit('side-route-change', val)
 }
@@ -54,7 +55,7 @@ window.$wujie.bus.$on('set-sideBar-select', (parameter: SystemRouteChange) => {
   // console.warn('====getSelectPath=====set-sideBar-select==========', parameter)
   const routeParams = {
     system: parameter.system,
-    route: parameter.route,
+    path: parameter.route,
     query: {
       ...parameter.query
     }
