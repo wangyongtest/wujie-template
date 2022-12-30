@@ -19,6 +19,7 @@ interface SubApplicationParams {
 const router = useRouter()
 
 window.$wujie?.bus.$on('distribution-to-sub', (res:SubApplicationParams) => {
+  console.log(res, '====res')
   if(res.path){
     router.push({path: res.path})
   }
@@ -26,8 +27,10 @@ window.$wujie?.bus.$on('distribution-to-sub', (res:SubApplicationParams) => {
 
 // TODO: 初次监听默认值
 watch(()=> window.$wujie.props, (newVal, oldVal) => {
+  console.log(newVal, '====')
   if(newVal&&newVal.path) {
-   router.push({path: newVal.path})
+    console.log(newVal, '=======')
+   router.push({path: newVal.path, query: newVal.query})
   }
 
 },{

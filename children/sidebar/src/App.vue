@@ -36,8 +36,8 @@ query:{
 
 
 // TODO: 默认首次进入系统设置选中： 菜单+ 跳转至默认页面
-const getSelectPath = (val:{subSys:string, keyPath:string}) => {
-  // console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
+const getSelectPath = (val:SystemRouteChange) => {
+  console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
 
   window.$wujie.bus.$emit('side-route-change', val)
 }

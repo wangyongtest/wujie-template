@@ -29,7 +29,6 @@ import '~/utils/wujie'
 import { SystemRouteChange } from '~/types/routeTypes'
 import { useWuJieScheduler } from '~/store/wujieStore'
 import { routeStore } from '~/store/routeStore'
-import Wujie from 'wujie/esm/sandbox'
 
 const { stateRoute } = useWuJieScheduler()
 const { tempPathList } = routeStore()
@@ -49,14 +48,18 @@ const attributes = reactive({
   // replace: {},
 })
 
+//  TODO: 配置默认的 子系统【待确认】
+
 watch(
   () => stateRoute,
   (newVal) => {
     if (newVal.path && newVal.system) {
+      console.log(newVal, 'main')
       attributes.name = newVal.system
-      attributes.props = { path: newVal.path, query: newVal.query }
+      attributes.props = { path: newVal.path, query: newVal.query || {} }
       attributes.url = tempPathList(newVal.system)
     }
+    console.log(attributes.props, 'props')
   },
   {
     immediate: true,
@@ -71,8 +74,10 @@ watch(
  *                                2、基座分发 路由 + 参数 到 对应子应用
  *  以上方式都采用广播形式， 是：对应子应用接收路由+参数跳转， 否： 放弃参数
  * ***/
+
 // TODO:子应用 路径地址获取
 import { subPaths } from '~/sub-path-config/index'
+
 // TODO: 设置或获取 默认子应用配置项
 import { defaultSubConf } from '~/store/defaultSubConf'
 

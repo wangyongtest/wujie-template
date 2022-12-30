@@ -1,6 +1,3 @@
-
-
-
 <template>
   <section>
     <el-button @click="jump">jump</el-button>
@@ -27,13 +24,6 @@ const jump = (parameter:CrossSystemParameter) => {
     }
   })
 }
-
-
-
-
-
-
-
 
 </script>
 

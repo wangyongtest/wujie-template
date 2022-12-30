@@ -35,7 +35,7 @@ import { MenuConfig } from '~/types/index'
 import { routeForSystem } from '~/store/routeForSystem'
 
 
-import {floatDataArray} from '~/utils/index'
+import { floatDataArray } from '~/utils/index'
 
 // TODO: 获取父组件传过来的配置参数
 const props = withDefaults(defineProps<{
