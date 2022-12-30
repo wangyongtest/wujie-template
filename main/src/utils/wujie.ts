@@ -2,13 +2,15 @@ import wujieVue3 from 'wujie-vue3'
 
 import { SystemJumpParam } from '~/types/routeTypes'
 import { useWuJieScheduler } from '~/store/wujieStore'
+import { useSelectedMenuTags } from '~/store/selectedMenuTag'
 const { setWuJieRouterState } = useWuJieScheduler()
+const { setActiveItem } = useSelectedMenuTags()
 /************************************************************************************************/
 // TODO: 无界 eventBus
 const { bus } = wujieVue3
 
 //  TODO: 菜单路由监听路由 切换
-bus.$on('side-route-change', (...res: Array<{ system: string; path: string }>) => {
+bus.$on('side-route-change', (...res: Array<{ system: string; path: string; name: string }>) => {
   //  [{subSys: 'sub-person', keyPath: '/homeDetail'}]
   // [{subSys: 'sub-system', keyPath: '/systemMenu'}]
   // [{subSys: 'person', keyPath: '/about'}]
@@ -22,7 +24,12 @@ bus.$on('side-route-change', (...res: Array<{ system: string; path: string }>) =
   systemJumpInfo = Object.assign({}, item)
 
   if (res.length) {
-    const { system, path } = res[0]
+    const { system, path, name } = res[0]
+    setActiveItem({
+      system,
+      path,
+      name
+    })
     setWuJieRouterState({ system, path })
     // TODO: sideBar 选中 提交基座 基座分发子系统
     // TODO: 子系统  跨系统跳转  转发基座  基座传sidebar  再走基座选中

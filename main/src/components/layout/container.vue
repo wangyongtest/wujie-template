@@ -1,5 +1,6 @@
 <template>
   <section class="container">
+    <menu-tag />
     <!-- 禁止路由重复 -->
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
@@ -12,6 +13,7 @@
 </template>
 
 <script lang="ts" setup>
+import MenuTag from '~/components/menuTags/index.vue'
 // const route = useRoute()
 // watch(
 //   () => route.query,

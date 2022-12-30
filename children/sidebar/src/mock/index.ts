@@ -73,7 +73,7 @@ export const testRoute = [
           role: [],
           systemName: 'system',
           level: 2,
-          isDisabled: true
+          isDisabled: false
         },
 				children: [],
 			},

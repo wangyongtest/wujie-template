@@ -27,11 +27,18 @@
 <script setup lang="ts">
 import '~/utils/wujie'
 import { SystemRouteChange } from '~/types/routeTypes'
+//  TODO： wujie 更新调度
 import { useWuJieScheduler } from '~/store/wujieStore'
+//  TODO: 选中菜单
 import { routeStore } from '~/store/routeStore'
+// TODO: 设置或获取 默认子应用配置项
+import { defaultChildConf } from '~/store/defaultSubConf'
 
 const { stateRoute } = useWuJieScheduler()
+
 const { tempPathList } = routeStore()
+// TODO: 设置 & 获取默认配置项
+const { defaultConf } = defaultChildConf()
 
 // TODO: 定义默认属性
 const attributes = reactive({
@@ -48,13 +55,18 @@ const attributes = reactive({
   // replace: {},
 })
 
-//  TODO: 配置默认的 子系统【待确认】
+// 在 页面挂载时，设置要挂载的 子应用
+onMounted(() => {
+  //  TODO: 设置默认子应用，可配置、可调接口设置
+  attributes.name = defaultConf.name
+  attributes.url = defaultConf.path
+})
 
+//  TODO: 配置默认的 子系统【待确认】
 watch(
   () => stateRoute,
   (newVal) => {
     if (newVal.path && newVal.system) {
-      console.log(newVal, 'main')
       attributes.name = newVal.system
       attributes.props = { path: newVal.path, query: newVal.query || {} }
       attributes.url = tempPathList(newVal.system)
@@ -77,19 +89,6 @@ watch(
 
 // TODO:子应用 路径地址获取
 import { subPaths } from '~/sub-path-config/index'
-
-// TODO: 设置或获取 默认子应用配置项
-import { defaultSubConf } from '~/store/defaultSubConf'
-
-// TODO: 设置 & 获取默认配置项
-const { setDefaultSubConf, getDefaultSubConf } = defaultSubConf()
-
-// 在 页面挂载时，设置要挂载的 子应用
-onMounted(() => {
-  //  TODO: 设置默认子应用，可配置、可调接口设置
-  attributes.name = getDefaultSubConf.name
-  attributes.url = getDefaultSubConf.path
-})
 
 const beforeLoad = (appWindow: Window) => {
   console.warn('base-index=======》 beforeLoad', appWindow)

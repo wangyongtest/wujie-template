@@ -37,7 +37,7 @@ query:{
 
 // TODO: 默认首次进入系统设置选中： 菜单+ 跳转至默认页面
 const getSelectPath = (val:SystemRouteChange) => {
-  console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
+  // console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
 
   window.$wujie.bus.$emit('side-route-change', val)
 }
@@ -47,7 +47,6 @@ window.$wujie.bus.$on('set-sideBar-select', (parameter: SystemRouteChange) => {
   // console.warn('====getSelectPath=====set-sideBar-select==========', parameter)
   menuConfig.defaultOpened = [`${parameter.system}`]
   menuConfig.defaultActive = parameter.path
-
 })
 
 

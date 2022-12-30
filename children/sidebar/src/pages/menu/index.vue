@@ -65,7 +65,7 @@ const setDefault = computed(() => {
   return props.menuConfig
 })
 
-// console.log(floatDataArray(testRoute))
+console.log(floatDataArray(testRoute))
 const floatRoutes = floatDataArray(testRoute)
 
 const emits = defineEmits(['getSelect'])
@@ -75,7 +75,8 @@ const handSelect = (key:string) => {
   const item = floatRoutes.find(r=> r.path === key&&r)
   emits('getSelect', {
     system: item?.meta.systemName || '',
-    path: item?.path || ''
+    path: item?.path || '',
+    name: item?.name
   })
 }
 
@@ -84,7 +85,8 @@ watch(()=> defaultOpened, (newVal, oldVal) => {
     const sysKey = newVal[0]
     emits('getSelect', {
     system: routeForSys[sysKey] || routeForSys[`/${sysKey}`],
-    path: defaultActive
+    path: defaultActive,
+    name: '人员列表'
   })
   }
 },{

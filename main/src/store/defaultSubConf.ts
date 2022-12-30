@@ -1,7 +1,10 @@
-import { defineStore } from 'pinia'
+interface DefaultConf {
+  name: string
+  path: string
+}
 
-export const defaultSubConf = defineStore('defaultSubConf', () => {
-  const defaultConfig = reactive({
+export const defaultChildConf = defineStore('defaultChildConf', () => {
+  const defaultConf: DefaultConf = reactive({
     name: 'person',
     path: 'http://127.0.0.1:3003/'
   })
@@ -12,11 +15,12 @@ export const defaultSubConf = defineStore('defaultSubConf', () => {
 
   // TODO: 获取默认配置项
   const getDefaultSubConf = computed(() => {
-    return defaultConfig
+    return defaultConf
   })
 
   return {
-    setDefaultSubConf,
-    getDefaultSubConf
+    getDefaultSubConf,
+    defaultConf,
+    setDefaultSubConf
   }
 })

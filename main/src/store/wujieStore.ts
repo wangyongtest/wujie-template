@@ -13,7 +13,7 @@ export const useWuJieScheduler = defineStore('useWuJieScheduler', () => {
 
   // TODO: actions
   const setWuJieRouterState = (payload: SystemJumpParam) => {
-    console.log(payload)
+    // console.log(payload)
     // !reactive 不能直接赋值对象，否则失去响应式
     // stateRoute = {
     //   path: payload.path,
