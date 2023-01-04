@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import '~/utils/wujie'
-import { SystemRouteChange } from '~/types/routeTypes'
 //  TODO： wujie 更新调度
 import { useWuJieScheduler } from '~/store/wujieStore'
 //  TODO: 选中菜单
@@ -88,7 +87,7 @@ watch(
  * ***/
 
 // TODO:子应用 路径地址获取
-import { subPaths } from '~/sub-path-config/index'
+// import { subPaths } from '~/sub-path-config/index'
 
 const beforeLoad = (appWindow: Window) => {
   console.warn('base-index=======》 beforeLoad', appWindow)

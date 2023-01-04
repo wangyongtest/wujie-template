@@ -37,6 +37,7 @@ import MenuTag from '~/components/menuTags/index.vue'
   .compContent {
     width: 100%;
     height: 100%;
+    padding: 10px 5px 0 5px;
   }
 }
 </style>

@@ -1,6 +1,5 @@
 
 
-
 <template>
   <Menu
     ref="menuNode"
@@ -38,15 +37,22 @@ query:{
 // TODO: 默认首次进入系统设置选中： 菜单+ 跳转至默认页面
 const getSelectPath = (val:SystemRouteChange) => {
   // console.warn(`%csidebar-select--->${JSON.stringify(val)}`,'color: #43bb88;font-size: 24px;font-weight: bold;text-decoration: underline;')
-
   window.$wujie.bus.$emit('side-route-change', val)
 }
 
 // TODO: 跨系统跳转时 sideBar 选中
 window.$wujie.bus.$on('set-sideBar-select', (parameter: SystemRouteChange) => {
-  // console.warn('====getSelectPath=====set-sideBar-select==========', parameter)
+  
+  if(parameter.path && parameter.path ===  menuConfig.defaultActive){
+    // console.warn('====getSelectPath=====set-sideBar-select==========', parameter,menuConfig.defaultActive)
+    menuConfig.defaultActive = ''
+  }
+  // TODO: 当剩余最后一个时，可能会出现与默认选中路由相同情况，所有先置空，再设置(相同设置不更新)
+ nextTick(()=>{
   menuConfig.defaultOpened = [`${parameter.system}`]
   menuConfig.defaultActive = parameter.path
+ })
+ 
 })
 
 

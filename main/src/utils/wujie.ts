@@ -38,12 +38,19 @@ bus.$on('side-route-change', (...res: Array<{ system: string; path: string; name
 })
 
 // TODO: 跨系统
-bus.$on('subSystem-route-change', (childParams: SystemRouteChange) => {
+bus.$on('subSystem-route-change', (childParams: SystemJumpParam) => {
   console.warn('子应用传参到基座', childParams)
-  const { path, system, query } = childParams
-  setWuJieRouterState({ system, path, query })
-  // TODO: 传惨给sideBar
-  bus.$emit('set-sideBar-select', childParams)
-  // TODO: 传参给对应子系统
+  handDispense(childParams)
   bus.$emit('distribution-to-sub', childParams)
 })
+
+// TODO: 系统分发到子系统
+
+export const handDispense = (params: SystemJumpParam) => {
+  const { path, system, query } = params
+  setWuJieRouterState({ system, path, query })
+  // TODO: 传惨给sideBar
+  bus.$emit('set-sideBar-select', params)
+  // TODO: 传参给对应子系统
+  bus.$emit('distribution-to-sub', params)
+}

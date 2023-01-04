@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <el-card>
     <el-button @click="jump">jump</el-button>
-  </section>
+  </el-card>
 </template>
 
 <script lang="ts" setup>
