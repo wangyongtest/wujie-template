@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Avatar: typeof import('./components/Header/avatar.vue')['default']
     Container: typeof import('./components/layout/container.vue')['default']
+    DialogCom: typeof import('./components/common/dialogCom/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
