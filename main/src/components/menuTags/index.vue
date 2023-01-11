@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { CloseBold, ArrowDown } from '@element-plus/icons-vue'
-import { DefaultTagsItem, MenuTagItem, TagItem } from '~/types/menuTypes'
+import { MenuTagItem, TagItem } from '~/types/menuTypes'
 import { useSelectedMenuTags } from '~/store/selectedMenuTag'
 import { handDispense } from '~/utils/wujie'
 import { useMessageDialog } from '~/hooks/messageHooks'
@@ -79,7 +79,6 @@ const handTags: Array<TagItem> = [
 
 // TODO: 点击对应的tag跳转对应页面
 const handlerClickTag = async (tagItem: MenuTagItem) => {
-  console.log(tagItem)
   await setActiveItem(tagItem)
   await handDispense(tagItem)
 }

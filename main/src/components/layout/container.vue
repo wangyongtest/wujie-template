@@ -10,10 +10,15 @@
       </transition>
     </router-view>
   </section>
+  <drawer-conf v-if="getDrawerConfData.isShow" :isShow="getDrawerConfData.isShow" />
 </template>
 
 <script lang="ts" setup>
 import MenuTag from '~/components/menuTags/index.vue'
+import DrawerConf from '~/components/layout/drawerConf.vue'
+import { useDrawerConf } from '~/store/drawerConf'
+
+const { getDrawerConfData } = useDrawerConf()
 // const route = useRoute()
 // watch(
 //   () => route.query,

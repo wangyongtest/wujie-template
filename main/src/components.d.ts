@@ -10,9 +10,11 @@ declare module '@vue/runtime-core' {
     Avatar: typeof import('./components/Header/avatar.vue')['default']
     Container: typeof import('./components/layout/container.vue')['default']
     DialogCom: typeof import('./components/common/dialogCom/index.vue')['default']
+    DrawerConf: typeof import('./components/layout/drawerConf.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
+    ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
@@ -36,5 +38,6 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideMenu: typeof import('./components/layout/sideMenu.vue')['default']
+    SvgIcon: typeof import('./components/common/svgIcon/index.vue')['default']
   }
 }

@@ -49,6 +49,8 @@ export default defineConfig({
       resolvers: [
         // 自动注册图标组件
         IconsResolver({
+          // 自动导入的目录
+          // dirs: ['src/components/common],
           enabledCollections: ['ep']
         }),
         ElementPlusResolver({

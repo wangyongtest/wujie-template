@@ -42,19 +42,19 @@
 
       <section class="header_info">
         <el-tooltip effect="dark" content="消息" placement="bottom">
-          <el-icon color="#fff" :size="24"><Bell /></el-icon>
+          <SvgIcon :iconClass="Bell" :fontSize="24" :color="'#FFFFFF'" />
         </el-tooltip>
       </section>
 
       <section class="header_fullScreen">
         <el-tooltip effect="dark" content="全屏" placement="bottom">
-          <el-icon color="#fff" :size="24"><FullScreen /></el-icon>
+          <SvgIcon :iconClass="FullScreen" :fontSize="24" :color="'#FFFFFF'" />
         </el-tooltip>
       </section>
 
-      <section class="header_setting">
+      <section class="header_setting" @click="handleConfiguration">
         <el-tooltip effect="dark" content="设置" placement="bottom">
-          <el-icon color="#fff" :size="24"><Setting /></el-icon>
+          <SvgIcon :iconClass="Setting" :fontSize="24" :color="'#FFFFFF'" />
         </el-tooltip>
       </section>
 
@@ -65,20 +65,33 @@
 
 <script lang="ts" setup>
 import AvatarInfo from '~/components/Header/avatar.vue'
+import SvgIcon from '~/components/common/svgIcon/index.vue'
 import { Bell, FullScreen, Setting } from '@element-plus/icons'
 import { themeStore } from '~/store/theme'
+import { useDrawerConf } from '~/store/drawerConf'
 
 // 自定义主题
 const color = ref('red')
 
+const { setDrawerConf } = useDrawerConf()
 const { changeTheme } = themeStore()
 
+// TODO: 切换主题
 const changeColor = () => {
   changeTheme(color.value)
+}
+
+// TODO： 改变配置项
+const handleConfiguration = () => {
+  setDrawerConf({
+    isShow: true
+  })
 }
 </script>
 
 <style lang="less" scoped>
+// TODO: 添加 阿里矢量图标库[阿里矢量图标库使用 font class]
+@import '~/assets/headerIcons/iconfont.css';
 .header {
   height: 60px;
   width: 100%;
@@ -107,6 +120,7 @@ const changeColor = () => {
     // 自定义主题操作项
     .header_customTheme {
       margin: 0 20px;
+      cursor: pointer;
     }
 
     .header_info {
@@ -114,13 +128,16 @@ const changeColor = () => {
       // width: 32px;
       // height: 32px;
       // background: #fff;
+      cursor: pointer;
     }
     .header_fullScreen {
       margin: 0 0 0 20px;
+      cursor: pointer;
     }
 
     .header_setting {
       margin: 0 0 0 20px;
+      cursor: pointer;
     }
 
     // 操作项
