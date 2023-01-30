@@ -1,6 +1,7 @@
 import wujieVue3 from 'wujie-vue3'
 
 import { SystemJumpParam } from '~/types/routeTypes'
+import { PayoutParam } from '~/types/paramsTypes'
 import { useWuJieScheduler } from '~/store/wujieStore'
 import { useSelectedMenuTags } from '~/store/selectedMenuTag'
 const { setWuJieRouterState } = useWuJieScheduler()
@@ -45,7 +46,6 @@ bus.$on('subSystem-route-change', (childParams: SystemJumpParam) => {
 })
 
 // TODO: 系统分发到子系统
-
 export const handDispense = (params: SystemJumpParam) => {
   const { path, system, query } = params
   setWuJieRouterState({ system, path, query })
@@ -53,4 +53,10 @@ export const handDispense = (params: SystemJumpParam) => {
   bus.$emit('set-sideBar-select', params)
   // TODO: 传参给对应子系统
   bus.$emit('distribution-to-sub', params)
+}
+
+// TODO: 基座分发参数到子系统
+export const basePayoutToChild = (params: PayoutParam) => {
+  console.log(params)
+  bus.$emit('base-to-child-conf', params)
 }

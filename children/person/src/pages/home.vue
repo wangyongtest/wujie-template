@@ -1,6 +1,7 @@
+
 <template>
   <el-card>
-    <el-button @click="jump">jump</el-button>
+    <el-button type="primary" @click="jump">jump</el-button>
   </el-card>
 </template>
 

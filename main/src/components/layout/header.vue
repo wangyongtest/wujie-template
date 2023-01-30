@@ -28,7 +28,7 @@
       <!-- <el-button type="primary">test</el-button> -->
       <section class="header_customTheme">
         <!-- 自定义主题 -->
-        <el-tooltip
+        <!-- <el-tooltip
           class="box-item handle_theme"
           effect="dark"
           content="自定义主题"
@@ -37,7 +37,16 @@
           <span class="customCtx">
             <el-color-picker v-model="color" @change="changeColor" />
           </span>
-        </el-tooltip>
+        </el-tooltip> -->
+        <PickColor
+          :effect="pickColorConf.effect"
+          :context="pickColorConf.context"
+          :name="pickColorConf.name"
+          :defaultVal="pickColorConf.defaultVal"
+          :tips="pickColorConf.tips"
+          :icon="pickColorConf.icon"
+          :type="pickColorConf.type"
+        />
       </section>
 
       <section class="header_info">
@@ -64,22 +73,26 @@
 </template>
 
 <script lang="ts" setup>
+import PickColor from '~/components/Header/modules/picker.vue'
 import AvatarInfo from '~/components/Header/avatar.vue'
 import SvgIcon from '~/components/common/svgIcon/index.vue'
 import { Bell, FullScreen, Setting } from '@element-plus/icons'
-import { themeStore } from '~/store/theme'
 import { useDrawerConf } from '~/store/drawerConf'
 
 // 自定义主题
-const color = ref('red')
+// ※ : 此处应接收配置文件或者接口返回(已设置且保存服务器)颜色值
+
+const pickColorConf = reactive({
+  context: '主题',
+  name: '',
+  defaultVal: '#409eff',
+  tips: '',
+  icon: '',
+  type: '',
+  effect: ''
+})
 
 const { setDrawerConf } = useDrawerConf()
-const { changeTheme } = themeStore()
-
-// TODO: 切换主题
-const changeColor = () => {
-  changeTheme(color.value)
-}
 
 // TODO： 改变配置项
 const handleConfiguration = () => {
