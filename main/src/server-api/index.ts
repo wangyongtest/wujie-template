@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 export interface ResponseData<T> {
   code: number
@@ -35,8 +35,8 @@ class HttpRequest {
     )
 
     instance.interceptors.response.use(
-      (response) => {
-        const { code = 0 } = response
+      (response: AxiosResponse<ResponseData<T>>) => {
+        const { code = 200 } = response
         if (code !== 200) {
           return Promise.reject(response)
         }

@@ -1,4 +1,5 @@
 
+
 <template>
   <el-card>
     <el-button type="primary" @click="jump">jump</el-button>
@@ -25,6 +26,7 @@ const jump = (parameter:CrossSystemParameter) => {
     }
   })
 }
+
 
 </script>
 
