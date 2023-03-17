@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import path from 'path'
+import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -10,9 +10,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import legacy from '@vitejs/plugin-legacy'
 import Inspect from 'vite-plugin-inspect'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const pathSrc = path.resolve(__dirname, 'src')
+const pathSrc = resolve(__dirname, 'src')
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
@@ -30,7 +28,8 @@ export default defineConfig({
       // 浏览器兼容性插件
       targets: ['defaults', 'not IE 11']
     }),
-    // ! enabled: true 这里用来解决 eslint报错的配置项，会根据filepath生成一个eslint 的配置文件，这个文件需要引入到eslintrc 的extends选项中
+    // ! enabled: true 这里用来解决 eslint报错的配置项，会根据filepath生成一个eslint
+    // !的配置文件，这个文件需要引入到eslintrc 的extends选项中
     // 由于仅需生成一次，所以生成完文件后，配置项改为false
     AutoImport({
       imports: ['vue', 'vue-router', 'pinia'],
@@ -59,7 +58,7 @@ export default defineConfig({
           version: '2.1.5'
         })
       ],
-      dts: path.resolve(pathSrc, 'components.d.ts')
+      dts: resolve(pathSrc, 'components.d.ts')
     }),
     Icons({
       autoInstall: true

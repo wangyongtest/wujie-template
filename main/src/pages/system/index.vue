@@ -16,7 +16,7 @@
   {{ typeof childSystem }}
   {{ props }}
 
-  <section style="width: 100%; height: 100%">
+  <section class="container">
     <WujieVue
       width="100%"
       height="100%"
@@ -72,7 +72,7 @@ const childSystem = computed(() => {
 // const fetch = ref('')
 
 watch(
-  () => routeState.name,
+  () => routeState?.name,
   (newVal) => {
     console.log(newVal, `=======基座-watch========${newVal}=============`)
   }
@@ -98,4 +98,9 @@ const afterUnmount = (appWindow: Window) => {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped>
+.container {
+  width: 100%;
+  height: 100%;
+}
+</style>

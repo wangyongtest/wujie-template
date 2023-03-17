@@ -1,0 +1,32 @@
+{
+  "extends": ["stylelint-config-standard-vue"],
+  "customSyntax": "postcss-html",
+  "overrides": [
+    {
+      "files": ["**/*.vue", "*.vue"],
+      "customSyntax": "postcss-html"
+    }
+  ],
+  "rules": {
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "comment-empty-line-before": [
+      "always",
+      {
+        "ignore": ["stylelint-commands", "after-comment"]
+      }
+    ],
+    "declaration-colon-space-after": "always",
+    "indentation": 2,
+    "max-empty-lines": 2,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "except": ["first-nested"],
+        "ignore": ["after-comment"]
+      }
+    ],
+    "unit-whitelist": ["em", "rem", "%", "px", "s", "ms"],
+    "unit-no-unknown": true
+  }
+}

@@ -12,12 +12,15 @@ module.exports = {
     '@vue/prettier',
     './.eslintrc-auto-import.json'
   ],
-  parser: 'vue-eslint-parser',
+  parser: 'babel-eslint',
   parserOptions: {
     parser: '@typescript-eslint/parser',
     // 解析 .ts ⽂件
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
@@ -33,6 +36,12 @@ module.exports = {
         endOfLine: 'auto',
         printWidth: 100,
         bracketSpacing: true
+      }
+    ],
+    'vue/comment-directive': [
+      'error',
+      {
+        reportUnusedDisableDirectives: false
       }
     ]
   }

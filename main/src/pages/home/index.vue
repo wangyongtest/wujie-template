@@ -124,7 +124,7 @@ const loadError = (url: string, e: Error) => {
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="scss">
 .home {
   width: 100%;
   height: 100%;

@@ -35,7 +35,7 @@ class HttpRequest {
     )
 
     instance.interceptors.response.use(
-      (response: AxiosResponse<ResponseData<T>>) => {
+      (response: AxiosResponse<ResponseData>) => {
         const { code = 200 } = response
         if (code !== 200) {
           return Promise.reject(response)
